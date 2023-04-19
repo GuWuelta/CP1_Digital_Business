@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 import br.com.fiap.model.Profile;
 
 @Named
-@ViewScoped
 public class ProfileDAO{
 
     @PersistenceContext
@@ -45,7 +44,7 @@ public class ProfileDAO{
         CriteriaQuery<Profile> cq = cb.createQuery(Profile.class);
         Root<Profile> rootEntry = cq.from(Profile.class);
         CriteriaQuery<Profile> all = cq.select(rootEntry);
-        TypedQuery<Profile> allQuery = entityManager.createQuery(all);
+        TypedQuery<Profile> allQuery = entityManager.createQuery((all));
         return allQuery.getResultList();
     }
 }

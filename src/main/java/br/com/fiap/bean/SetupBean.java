@@ -9,8 +9,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
-import br.com.fiap.dao.SetupDAO;
+
 import br.com.fiap.model.Setup;
+import br.com.fiap.dao.SetupDAO;
 
 @Named
 @RequestScoped
@@ -18,7 +19,7 @@ public class SetupBean {
 	Setup setup = new Setup();
 
 	@Inject
-	private SetupDAO setupDao;
+	private SetupDAO setupDAO;
 	
     private Setup selectedSetup;
 
@@ -33,7 +34,7 @@ public class SetupBean {
 	@Transactional
 	public void save() {
 		if(setup.getName()!="" && setup.getDescription()!="") {
-			setupDao.salvar(setup);
+			setupDAO.salvar(setup);
 			this.setup = new Setup();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "As informações foram salvas com sucesso.", "INFO"));
 		} else {
@@ -42,7 +43,7 @@ public class SetupBean {
 	}
 	
 	public List<Setup> findAll(){
-		return setupDao.findAllSetups();
+		return setupDAO.findAllSetups();
 	}
 
 	public Setup getSelectedSetup() {

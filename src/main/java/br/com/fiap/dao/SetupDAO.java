@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 import br.com.fiap.model.Setup;
 
 @Named
-@ViewScoped
 public class SetupDAO {
 
 	@PersistenceContext
