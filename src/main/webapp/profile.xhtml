@@ -32,7 +32,7 @@
 				<p:inputText style="width:350px" id="profileEmail" value="#{profileBean.profile.email}"/>
 
 				<h5>Profile</h5>
-				<p:selectOneRadio id="profileOptions" value="#{radioView.console}">
+				<p:selectOneRadio id="profileOptions" value="#{profileBean.profile.profile}">
 					<f:selectItem itemLabel="User" itemValue="User"/>
 					<f:selectItem itemLabel="Admin" itemValue="Admin"/>
 				</p:selectOneRadio>
