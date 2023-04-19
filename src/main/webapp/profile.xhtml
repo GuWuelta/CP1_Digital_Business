@@ -25,29 +25,30 @@
 
 			<p:dialog header="Add New Profile" widgetVar="addProfileDialog" modal="true"
 					  showEffect="fade" hideEffect="fade" resizable="false">
-				<h5>Name</h5>
-				<p:inputText style="width:350px" id="profileName" value="#{profileBean.profile.name}"/>
+				<h:form id="addProfileForm">
+					<h5>Name</h5>
+					<p:inputText style="width:350px" id="profileName" value="#{profileBean.profile.name}"/>
 
-				<h5>Email</h5>
-				<p:inputText style="width:350px" id="profileEmail" value="#{profileBean.profile.email}"/>
+					<h5>Email</h5>
+					<p:inputText style="width:350px" id="profileEmail" value="#{profileBean.profile.email}"/>
 
-				<h5>Profile</h5>
-				<p:selectOneRadio id="profileOptions" value="#{profileBean.profile.profile}">
-					<f:selectItem itemLabel="User" itemValue="User"/>
-					<f:selectItem itemLabel="Admin" itemValue="Admin"/>
-				</p:selectOneRadio>
+					<h5>Profile</h5>
+					<p:selectOneRadio id="profileOptions" value="#{profileBean.profile.profile}">
+						<f:selectItem itemLabel="User" itemValue="User"/>
+						<f:selectItem itemLabel="Admin" itemValue="Admin"/>
+					</p:selectOneRadio>
 
-				<h5>Password</h5>
-				<p:inputText style="width:350px" id="profilePassword" value="#{profileBean.profile.password}"/>
+					<h5>Password</h5>
+					<p:inputText style="width:350px" id="profilePassword" value="#{profileBean.profile.password}"/>
 
-				<br/>
-				<br/>
+					<br/>
+					<br/>
 
-				<div style="text-align: center;">
-					<p:commandButton id="save" value="Save" action="#{profileBean.save()}" style="width: 250px;"
-									 icon="pi pi-save"/>
-				</div>
-
+					<div style="text-align: center;">
+						<p:commandButton id="save" value="Save" action="#{profileBean.save()}" style="width: 252px;"
+										 icon="pi pi-save" update="addProfileForm"/>
+					</div>
+				</h:form>
 			</p:dialog>
 		</h:panelGrid>
 	</p:panel>
