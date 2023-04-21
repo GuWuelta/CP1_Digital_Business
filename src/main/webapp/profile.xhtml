@@ -27,32 +27,44 @@
 
 	<p:panel id="panel">
 		<h:panelGrid columns="2" cellpadding="4">
-			<p:commandButton id="add" value="New profile" actionListener="#{profileBean.save()}" style="background-color: #fc6d81; color: white; border: none"
+			<p:commandButton id="add" value="Novo perfil" style="background-color: #fc6d81; color: white; border: none"
 							 icon="pi pi-plus" onclick="PF('addProfileDialog').show()" />
 
 			<p:dialog header="Add New Profile" widgetVar="addProfileDialog" modal="true"
 					  showEffect="fade" hideEffect="fade" resizable="false">
 				<h:form id="addProfileForm">
-					<h5>Name</h5>
-					<p:inputText style="width:350px" id="profileName" value="#{profileBean.profile.name}"/>
+					<h5>Nome</h5>
+					<p:inputText id="profileName" value="#{profileBean.profile.name}"
+								 required="true"
+								 requiredMessage="Nome é obrigatório!">
+						<f:validateLength minimum="10" />
+					</p:inputText>
 
 					<h5>Email</h5>
-					<p:inputText style="width:350px" id="profileEmail" value="#{profileBean.profile.email}"/>
+					<p:inputText id="profileEmail" value="#{profileBean.profile.email}"
+								 required="true"
+								 requiredMessage="Email é obrigatório!">
+						<f:validateLength minimum="10" />
+					</p:inputText>
 
-					<h5>Profile</h5>
+					<h5>Perfil</h5>
 					<p:selectOneRadio id="profileOptions" value="#{profileBean.profile.profile}">
 						<f:selectItem itemLabel="User" itemValue="User"/>
 						<f:selectItem itemLabel="Admin" itemValue="Admin"/>
 					</p:selectOneRadio>
 
-					<h5>Password</h5>
-					<p:inputText style="width:350px" id="profilePassword" value="#{profileBean.profile.password}"/>
+					<h5>Senha</h5>
+					<p:inputText id="profilePassword" value="#{profileBean.profile.password}"
+								 required="true"
+								 requiredMessage="Senha é obrigatória!">
+						<f:validateLength minimum="5" />
+					</p:inputText>
 
 					<br/>
 					<br/>
 
 					<div style="text-align: center;">
-						<p:commandButton id="save" value="Save" action="#{profileBean.save()}" style="width: 252px;"
+						<p:commandButton id="save" value="Salvar" action="#{profileBean.save()}" style="width: 252px; background-color: #fc6d81; border: none"
 										 icon="pi pi-save" update="addProfileForm"/>
 					</div>
 				</h:form>
@@ -67,12 +79,12 @@
 				<p:dataTable id="basicDT" var="profile" value="#{profileBean.findAll()}"
 							 styleClass="noHeader">
 
-					<p:column exportable="false" style="width: 15%;">
+					<p:column exportable="false" style="width: 15%;" headerText="Imagem" styleClass="myColumnHeader">
 						<p:graphicImage name="images/profilesPicture.png" style="width: 100px; height: 100px; border-radius: 50%;"/>
 					</p:column>
 
 
-					<p:column headerText="Name" styleClass="myColumnHeader">
+					<p:column headerText="Nome" styleClass="myColumnHeader">
 						<h3>#{profile.name}</h3>
 					</p:column>
 
@@ -81,14 +93,14 @@
 						<h3>#{profile.email}</h3>
 					</p:column>
 
-					<p:column headerText="Profile" styleClass="myColumnHeader">
+					<p:column headerText="Perfil" styleClass="myColumnHeader">
 						<h3>#{profile.profile}</h3>
 					</p:column>
 
 
-					<p:column style="text-align: center; width: 15%;">
+					<p:column style="text-align: center; width: 15%;" headerText="Senha" styleClass="myColumnHeader">
 						<p:commandButton update=":form:profileDetail"
-										 oncomplete="PF('profileDialog').show()" value="Profile password"
+										 oncomplete="PF('profileDialog').show()" value="Senha do perfil"
 										 icon="pi pi-eye" title="View" ajax="true" style="background-color: #fc6d81; color: white; border: none">
 							<f:setPropertyActionListener value="#{profile}"
 														 target="#{profileBean.selectedProfile}" />
@@ -97,16 +109,14 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog header="Profile password" widgetVar="profileDialog" modal="true"
+				<p:dialog header="Senha de #{profileBean.selectedProfile.name}" widgetVar="profileDialog" modal="true"
 						  showEffect="fade" hideEffect="fade" resizable="false">
 					<p:outputPanel id="profileDetail" style="text-align:center;">
 						<p:column rendered="#{not empty profileBean.selectedProfile}">
 							<div>
-								<h2>#{profileBean.selectedProfile.name}</h2>
+								<h3>Senha: #{profileBean.selectedProfile.password}</h3>
 								<br />
 							</div>
-
-							<div>Profile password: #{profileBean.selectedProfile.password}</div>
 						</p:column>
 					</p:outputPanel>
 				</p:dialog>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,7 +14,6 @@ import br.com.fiap.dao.ProfileDAO;
 import br.com.fiap.model.Profile;
 
 @Named
-@RequestScoped
 public class ProfileBean {
     Profile profile = new Profile();
 
