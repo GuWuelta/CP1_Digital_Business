@@ -39,7 +39,7 @@
 						<h2>R$ #{setup.price}</h2>
 						<p:commandButton update=":form:setupDetail"
 							oncomplete="PF('setupDialog').show()" value="Details"
-							icon="pi pi-search" title="View" ajax="true">
+							icon="pi pi-search" title="View" ajax="true" style="background-color: #fc6d81; border: none">
 							<f:setPropertyActionListener value="#{setup}"
 								target="#{setupBean.selectedSetup}" />
 						</p:commandButton>

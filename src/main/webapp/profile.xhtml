@@ -7,6 +7,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<style type="text/css">
+		.myColumnHeader .ui-column-title {
+			font-size: 28px;
+			color: #fc6d81;
+			}
+</style>
+
 </h:head>
 
 <h:body>
@@ -20,7 +27,7 @@
 
 	<p:panel id="panel">
 		<h:panelGrid columns="2" cellpadding="4">
-			<p:commandButton id="add" value="New profile" actionListener="#{setupBean.save()}" style="background-color: #6B8E23; color: white;"
+			<p:commandButton id="add" value="New profile" actionListener="#{profileBean.save()}" style="background-color: #fc6d81; color: white; border: none"
 							 icon="pi pi-plus" onclick="PF('addProfileDialog').show()" />
 
 			<p:dialog header="Add New Profile" widgetVar="addProfileDialog" modal="true"
@@ -51,6 +58,60 @@
 				</h:form>
 			</p:dialog>
 		</h:panelGrid>
+	</p:panel>
+
+	<p:panel>
+		<div class="profileCard">
+			<h:form id="form">
+
+				<p:dataTable id="basicDT" var="profile" value="#{profileBean.findAll()}"
+							 styleClass="noHeader">
+
+					<p:column exportable="false" style="width: 15%;">
+						<p:graphicImage name="images/profilesPicture.png" style="width: 100px; height: 100px; border-radius: 50%;"/>
+					</p:column>
+
+
+					<p:column headerText="Name" styleClass="myColumnHeader">
+						<h3>#{profile.name}</h3>
+					</p:column>
+
+
+					<p:column headerText="Email" styleClass="myColumnHeader">
+						<h3>#{profile.email}</h3>
+					</p:column>
+
+					<p:column headerText="Profile" styleClass="myColumnHeader">
+						<h3>#{profile.profile}</h3>
+					</p:column>
+
+
+					<p:column style="text-align: center; width: 15%;">
+						<p:commandButton update=":form:profileDetail"
+										 oncomplete="PF('profileDialog').show()" value="Profile password"
+										 icon="pi pi-eye" title="View" ajax="true" style="background-color: #fc6d81; color: white; border: none">
+							<f:setPropertyActionListener value="#{profile}"
+														 target="#{profileBean.selectedProfile}" />
+						</p:commandButton>
+						<br />
+					</p:column>
+				</p:dataTable>
+
+				<p:dialog header="Profile password" widgetVar="profileDialog" modal="true"
+						  showEffect="fade" hideEffect="fade" resizable="false">
+					<p:outputPanel id="profileDetail" style="text-align:center;">
+						<p:column rendered="#{not empty profileBean.selectedProfile}">
+							<div>
+								<h2>#{profileBean.selectedProfile.name}</h2>
+								<br />
+							</div>
+
+							<div>Profile password: #{profileBean.selectedProfile.password}</div>
+						</p:column>
+					</p:outputPanel>
+				</p:dialog>
+			</h:form>
+		</div>
 	</p:panel>
 </h:body>
 </html>
