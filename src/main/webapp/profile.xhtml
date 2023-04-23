@@ -109,8 +109,8 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog header="Senha de #{profileBean.selectedProfile.name}" widgetVar="profileDialog" modal="true"
-						  showEffect="fade" hideEffect="fade" resizable="false">
+				<p:dialog header="Senha do usuário" widgetVar="profileDialog" modal="true"
+						  showEffect="fade" hideEffect="fade" resizable="false" style="width:300px;">
 					<p:outputPanel id="profileDetail" style="text-align:center;">
 						<p:column rendered="#{not empty profileBean.selectedProfile}">
 							<div>
